@@ -25,7 +25,7 @@ namespace NAnyConnect_test1
 
     public partial class MainWindow : Window
     {
-        private List<Account> accounts = new List<Account>();
+        //private List<Account> accounts = new List<Account>();
         private MainController controller;
         private List<Button> buttons = new List<Button>();
 
@@ -35,23 +35,24 @@ namespace NAnyConnect_test1
         {
             InitializeComponent();
 
-            LoadData();
+            buttons.Add(button_account_1);
+            buttons.Add(button_account_2);
+
+            //LoadData();
+            controller = new MainController(this);
+            controller.SetUpMain();
 
             if (controller != null)
                 SystemEvents.PowerModeChanged += OnPowerChange;
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
 
-            buttons.Add(button_account_1);
-            buttons.Add(button_account_2);
 
-            controller.AdaptConnectionButtons(this);
         }
 
 
-        private void LoadData() {
-            accounts = Account.GetAccounts();
-            controller = new MainController(this);
-        }
+        //private void LoadData() {
+            //accounts = Account.GetAccounts();
+        //}
 
 
         public void SetUpConnectButton(int slot, string content, ButtonState state) {
@@ -131,6 +132,11 @@ namespace NAnyConnect_test1
                     controller.VpnSleep();
                     break;
             }
+        }
+
+        private void checkbox_reconnectAfterSleep_Checked(object sender, RoutedEventArgs e)
+        {
+            controller.RecognizeChangeReconnectAfterSleep();
         }
 
         /*private void Connect(object sender, RoutedEventArgs e)

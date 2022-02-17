@@ -9,11 +9,11 @@ namespace NAnyConnect_test1
     public class MainController
     {
 
-        private bool reconnectAfterSleep = true;
+        //private bool reconnectAfterSleep = true;
 
         private int selectedVpn = -1;
         private int selectedVpnSleep = -1;
-        string location = "\"C:\\Program Files (x86)\\Cisco\\Cisco AnyConnect Secure Mobility Client\\vpncli.exe\"";
+        //string location = "";
 
 
         private List<Account> accounts = new List<Account>();
@@ -42,10 +42,24 @@ namespace NAnyConnect_test1
             }
         }
 
+        public void AdaptReconnectAfterSleep() {
+            window.checkbox_reconnectAfterSleep.IsChecked = Options.ReconnectAfterSleep;
+        }
+
+        public void RecognizeChangeReconnectAfterSleep() {
+            Options.ReconnectAfterSleep = window.checkbox_reconnectAfterSleep.IsChecked ?? true;
+        }
+
+
         public MainController(MainWindow window)
         {
             LoadData();
             this.window = window;
+        }
+
+        public void SetUpMain() {
+            AdaptReconnectAfterSleep();
+            AdaptConnectionButtons(window);
         }
 
 
@@ -110,7 +124,7 @@ namespace NAnyConnect_test1
             string script = accounts[slot].Script;
             script = script.Replace("<password>", pwd);
 
-            VpnCmdConnector.Connect(location, script);
+            VpnCmdConnector.Connect(Options.VpnExecutableLocation, script);
 
             selectedVpn = accounts[slot].Id;
             AdaptConnectionButtons(window);
@@ -135,7 +149,7 @@ namespace NAnyConnect_test1
 
         public void VpnEnd()
         {
-            VpnCmdConnector.Disconnect(location);
+            VpnCmdConnector.Disconnect(Options.VpnExecutableLocation);
 
             selectedVpn = -1;
             AdaptConnectionButtons(window);
@@ -157,7 +171,7 @@ namespace NAnyConnect_test1
         }
 
         public void VpnWakeup() {
-            if (reconnectAfterSleep && !selectedVpnSleep.Equals(-1)) {
+            if (Options.ReconnectAfterSleep && !selectedVpnSleep.Equals(-1)) {
                 VpnStartWithId(selectedVpnSleep);
                 selectedVpn = selectedVpnSleep;
                 selectedVpnSleep = -1;

@@ -8,7 +8,7 @@
         Title="N-Any-Connect" Height="450" Width="800">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="40,25,0,0" TextWrapping="Wrap" Text="Status:" VerticalAlignment="Top"/>
-        <CheckBox Content="Reconnect after sleep" HorizontalAlignment="Left" Margin="40,73,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkbox_reconnectAfterSleep" Content="Reconnect after sleep" HorizontalAlignment="Left" Margin="40,73,0,0" VerticalAlignment="Top" Checked="checkbox_reconnectAfterSleep_Checked" Unchecked="checkbox_reconnectAfterSleep_Checked"/>
         <Button x:Name="button_account_1" Content="Button" HorizontalAlignment="Left" Margin="40,131,0,0" VerticalAlignment="Top" Tag="0" Click="ConnectButton_Connect_Click">
             <Button.ContextMenu>
                 <ContextMenu>
@@ -34,6 +34,7 @@
             </Button.ContextMenu>
         </Button>
         <Button x:Name="button_noConnection" Content="&#xF140;" HorizontalAlignment="Left" Margin="176,131,0,0" VerticalAlignment="Top" Tag="noConnection" FontFamily="Segoe Fluent Icons" Click="NoConnectionButton_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="458,33,0,0" VerticalAlignment="Top"/>
         <!--&#xE871; &#xEcc9; -->
     </Grid>
 </Window>
