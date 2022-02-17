@@ -110,6 +110,14 @@ namespace NAnyConnect_test1
         {
             controller.VpnEnd();
         }
+
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            SettingsWindow w = new SettingsWindow(controller);
+            w.ShowDialog();
+        }
         #endregion
 
 

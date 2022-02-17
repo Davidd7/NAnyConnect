@@ -12,4 +12,17 @@
     <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="SettingsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="SettingsWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

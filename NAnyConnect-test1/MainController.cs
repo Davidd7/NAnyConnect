@@ -81,6 +81,19 @@ namespace NAnyConnect_test1
             }
         }
 
+
+
+
+        public void SetUpSettingsWindow(SettingsWindow sw)
+        {
+            sw.form_vpnExecutableLocation.Text = Options.VpnExecutableLocation;
+        }
+
+        public void SaveSettingsWindowChanges(string vpnExecutableLocation) { 
+            Options.VpnExecutableLocation = vpnExecutableLocation;
+        }
+
+
         public void saveChanges(int slot, string displayName, string script, ref string password) {
 
             if (slot >= accounts.Count)
