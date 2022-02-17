@@ -69,6 +69,21 @@ namespace NAnyConnect_test1
             }
         }
 
+        public static void deleteAccount(int id)
+        {
+            using (var connection = new SqliteConnection("Data Source=n_any_connect_database.db"))
+            {
+                connection.Open();
+                SqliteCommand sqlite_cmd;
+                string Createsql = "DELETE FROM vpn_accounts WHERE id = $id";
+                sqlite_cmd = connection.CreateCommand();
+                sqlite_cmd.CommandText = Createsql;
+                sqlite_cmd.Parameters.AddWithValue("id", id);
+                sqlite_cmd.ExecuteNonQuery();
+            }
+            accounts.RemoveAll(a => a.Id.Equals(id));
+        }
+
 
 
         public static List<Account> GetAccounts()

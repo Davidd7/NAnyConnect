@@ -64,6 +64,14 @@ namespace NAnyConnect_test1
         }
 
 
+        public void DeleteSlot(int slot)
+        {
+            if (getIdFromSlot(slot).Equals(selectedVpn))
+                VpnEnd(false); // ui will be updated at the end of this method
+            Account.deleteAccount(  getIdFromSlot(slot)  );
+            accounts = Account.GetAccounts();
+            AdaptConnectionButtons(window);
+        } 
 
 
 
@@ -99,24 +107,23 @@ namespace NAnyConnect_test1
 
             if (slot >= accounts.Count)
             {
-
                 int id = Account.createNewAccount(displayName, script);
                 PasswordManager.SetPassword(id, ref password);
-
             }
-            else {
-
+            else // Update existing account
+            {
                 Account.updateAccount(accounts[slot].Id, displayName, script);
                 if (password != "") {
                     PasswordManager.SetPassword(accounts[slot].Id, ref password);
+                }
+                if (selectedVpn.Equals(accounts[slot].Id))
+                {
+                    VpnRestart();
                 }
 
             }
 
             AdaptConnectionButtons(window);
-            if (selectedVpn.Equals(accounts[slot].Id)) {
-                VpnRestart();
-            }
         }
 
 

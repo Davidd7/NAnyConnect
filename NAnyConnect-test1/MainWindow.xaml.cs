@@ -28,6 +28,7 @@ namespace NAnyConnect_test1
         //private List<Account> accounts = new List<Account>();
         private MainController controller;
         private List<Button> buttons = new List<Button>();
+        private List<ButtonState> buttonStates = new List<ButtonState>( );
 
         public enum ButtonState { Disabled = 0, EnabledUnselected = 1, EnabledSelected = 2 };
 
@@ -38,6 +39,8 @@ namespace NAnyConnect_test1
             buttons.Add(button_account_1);
             buttons.Add(button_account_2);
 
+            buttonStates.Add(ButtonState.Disabled);
+            buttonStates.Add(ButtonState.Disabled);
 
             controller = new MainController(this);
             controller.SetUpMain();
@@ -55,7 +58,7 @@ namespace NAnyConnect_test1
             buttons.ElementAt(slot).Content = content;
             switch (state) {
                 case ButtonState.Disabled:
-                    buttons.ElementAt(slot).IsEnabled = false;
+                    //buttons.ElementAt(slot).IsEnabled = false;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[0]).Visibility = Visibility.Visible; // Create
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[1]).Visibility = Visibility.Collapsed; // Connect
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[2]).Visibility = Visibility.Collapsed; // Disconnect
@@ -63,7 +66,7 @@ namespace NAnyConnect_test1
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[5]).Visibility = Visibility.Collapsed; // Delete
                     break;
                 case ButtonState.EnabledUnselected:
-                    buttons.ElementAt(slot).IsEnabled = true;
+                    //buttons.ElementAt(slot).IsEnabled = true;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[0]).Visibility = Visibility.Collapsed;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[1]).Visibility = Visibility.Visible;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[2]).Visibility = Visibility.Collapsed;
@@ -73,7 +76,7 @@ namespace NAnyConnect_test1
                     buttons.ElementAt(slot).Foreground = Brushes.Black;
                     break;
                 case ButtonState.EnabledSelected:
-                    buttons.ElementAt(slot).IsEnabled = true;
+                    //buttons.ElementAt(slot).IsEnabled = true;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[0]).Visibility = Visibility.Collapsed;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[1]).Visibility = Visibility.Collapsed;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[2]).Visibility = Visibility.Visible;
@@ -83,6 +86,7 @@ namespace NAnyConnect_test1
                     buttons.ElementAt(slot).Foreground = Brushes.White;
                     break;
             }
+            buttonStates[slot] = state;
         }
 
         public void setUpNoConnectionButton(ButtonState state)
@@ -105,19 +109,26 @@ namespace NAnyConnect_test1
         private void ConnectButton_Connect_Click(object sender, RoutedEventArgs e)
         {
             int slot = int.Parse((string)(sender as Control).Tag);
-            controller.VpnStart(slot);
+            if (!buttonStates[slot].Equals(ButtonState.Disabled))
+            {
+                controller.VpnStart(slot);
+            }
+            else
+            {
+                EditWindow w = new EditWindow(slot, controller);
+                w.ShowDialog();
+            }
         }
         private void ConnectButton_Edit_Click(object sender, RoutedEventArgs e)
         {
             int slot = int.Parse((string) (sender as Control).Tag);
-
             EditWindow w = new EditWindow(slot, controller);
-            w.ShowDialog(); // w.Show();
+            w.ShowDialog();
         }
         private void ConnectButton_Delete_Click(object sender, RoutedEventArgs e)
         {
             int slot = int.Parse((string)(sender as Control).Tag);
-
+            controller.DeleteSlot(slot);
         }
         private void NoConnectionButton_Click(object sender, RoutedEventArgs e)
         {
@@ -131,6 +142,7 @@ namespace NAnyConnect_test1
             SettingsWindow w = new SettingsWindow(controller);
             w.ShowDialog();
         }
+
         #endregion
 
 
