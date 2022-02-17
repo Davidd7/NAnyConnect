@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NAnyConnect_test1"
         mc:Ignorable="d"
-        Title="Global settings" Height="450" Width="800">
+        Title="Global settings" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="/testicon.png" Background="White" Foreground="Black" WindowStyle="SingleBorderWindow">
     <Grid>
         <Label Content="Path to the Vpn Executable (e. g. &quot;C:\Program Files (x86)\Cisco\Cisco AnyConnect Secure Mobility Client\vpncli.exe&quot;):" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="form_vpnExecutableLocation" HorizontalAlignment="Left" Margin="10,41,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="324" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled"/>

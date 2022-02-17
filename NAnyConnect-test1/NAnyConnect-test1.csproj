@@ -9,7 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="testicon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="testicon.png" />
   </ItemGroup>
 
   <ItemGroup>

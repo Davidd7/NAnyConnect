@@ -160,12 +160,13 @@ namespace NAnyConnect_test1
         }
 
 
-        public void VpnEnd()
+        public void VpnEnd(bool updateUI = true)
         {
             VpnCmdConnector.Disconnect(Options.VpnExecutableLocation);
 
             selectedVpn = -1;
-            AdaptConnectionButtons(window);
+            if (updateUI)
+                AdaptConnectionButtons(window);
         }
 
 

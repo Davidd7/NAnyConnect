@@ -73,6 +73,8 @@ namespace NAnyConnect_test1
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[2]).Visibility = Visibility.Collapsed;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[4]).Visibility = Visibility.Visible;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[5]).Visibility = Visibility.Visible;
+                    buttons.ElementAt(slot).Background = Brushes.White;
+                    buttons.ElementAt(slot).Foreground = Brushes.Black;
                     break;
                 case ButtonState.EnabledSelected:
                     buttons.ElementAt(slot).IsEnabled = true;
@@ -81,6 +83,8 @@ namespace NAnyConnect_test1
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[2]).Visibility = Visibility.Visible;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[4]).Visibility = Visibility.Visible;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[5]).Visibility = Visibility.Visible;
+                    buttons.ElementAt(slot).Background = new SolidColorBrush( (Color)ColorConverter.ConvertFromString("#097dff") );   //Color.  "#097dff")  Brushes.Blue;
+                    buttons.ElementAt(slot).Foreground = Brushes.White;
                     break;
 
 
@@ -124,6 +128,7 @@ namespace NAnyConnect_test1
 
         void OnProcessExit(object sender, EventArgs e)
         {
+            controller.VpnEnd();
             SystemEvents.PowerModeChanged -= OnPowerChange;
         }
 
