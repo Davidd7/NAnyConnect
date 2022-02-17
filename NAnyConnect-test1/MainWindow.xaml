@@ -1,0 +1,39 @@
+﻿<Window x:Class="NAnyConnect_test1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NAnyConnect_test1"
+        mc:Ignorable="d"
+        Title="N-Any-Connect" Height="450" Width="800">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="40,25,0,0" TextWrapping="Wrap" Text="Status:" VerticalAlignment="Top"/>
+        <CheckBox Content="Reconnect after sleep" HorizontalAlignment="Left" Margin="40,73,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button_account_1" Content="Button" HorizontalAlignment="Left" Margin="40,131,0,0" VerticalAlignment="Top" Tag="0" Click="ConnectButton_Connect_Click">
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="Create" Header="Create new" Tag="0" Click="ConnectButton_Edit_Click" />
+                    <MenuItem x:Name="Connect" Header="Connect" Tag="0" Click="ConnectButton_Connect_Click" />
+                    <MenuItem x:Name="Disconnect" Header="Disconnect" Tag="0" Click="NoConnectionButton_Click" />
+                    <Separator />
+                    <MenuItem x:Name="Edit" Header="Edit" Tag="0" Click="ConnectButton_Edit_Click" />
+                    <MenuItem x:Name="Delete" Header="Delete" Tag="0" Click="ConnectButton_Delete_Click" />
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+        <Button x:Name="button_account_2" Content="Button" HorizontalAlignment="Left" Margin="107,131,0,0" VerticalAlignment="Top" Tag="1" Click="ConnectButton_Connect_Click">
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="Create1" Header="Create new" Tag="1" Click="ConnectButton_Edit_Click" />
+                    <MenuItem x:Name="Connect1" Header="Connect" Tag="1" Click="ConnectButton_Connect_Click" />
+                    <MenuItem x:Name="Disconnect1" Header="Disconnect" Tag="1" Click="NoConnectionButton_Click" />
+                    <Separator />
+                    <MenuItem x:Name="Edit1" Header="Edit" Tag="1" Click="ConnectButton_Edit_Click" />
+                    <MenuItem x:Name="Delete1" Header="Delete" Tag="1" Click="ConnectButton_Delete_Click" />
+                </ContextMenu>
+            </Button.ContextMenu>
+        </Button>
+        <Button x:Name="button_noConnection" Content="&#xF140;" HorizontalAlignment="Left" Margin="176,131,0,0" VerticalAlignment="Top" Tag="noConnection" FontFamily="Segoe Fluent Icons" Click="NoConnectionButton_Click"/>
+        <!--&#xE871; &#xEcc9; -->
+    </Grid>
+</Window>
