@@ -40,6 +40,7 @@ namespace NAnyConnect_test1
                 }
                 mainWindow.SetUpConnectButton(i, (accounts.Count > i ? accounts[i].DisplayName : "empty"), state);
             }
+            mainWindow.setUpNoConnectionButton(  (selectedVpn != -1 ? MainWindow.ButtonState.EnabledUnselected : MainWindow.ButtonState.EnabledSelected)  );
         }
 
         public void AdaptReconnectAfterSleep() {

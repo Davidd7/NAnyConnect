@@ -38,7 +38,7 @@ namespace NAnyConnect_test1
             buttons.Add(button_account_1);
             buttons.Add(button_account_2);
 
-            //LoadData();
+
             controller = new MainController(this);
             controller.SetUpMain();
 
@@ -49,10 +49,6 @@ namespace NAnyConnect_test1
 
         }
 
-
-        //private void LoadData() {
-            //accounts = Account.GetAccounts();
-        //}
 
 
         public void SetUpConnectButton(int slot, string content, ButtonState state) {
@@ -83,11 +79,24 @@ namespace NAnyConnect_test1
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[2]).Visibility = Visibility.Visible;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[4]).Visibility = Visibility.Visible;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[5]).Visibility = Visibility.Visible;
-                    buttons.ElementAt(slot).Background = new SolidColorBrush( (Color)ColorConverter.ConvertFromString("#097dff") );   //Color.  "#097dff")  Brushes.Blue;
+                    buttons.ElementAt(slot).Background = new SolidColorBrush( (Color)ColorConverter.ConvertFromString("#097dff") );
                     buttons.ElementAt(slot).Foreground = Brushes.White;
                     break;
+            }
+        }
 
-
+        public void setUpNoConnectionButton(ButtonState state)
+        {
+            switch (state)
+            {
+                case ButtonState.EnabledUnselected:
+                    button_noConnection.Background = Brushes.White;
+                    button_noConnection.Foreground = Brushes.Black;
+                    break;
+                case ButtonState.EnabledSelected:
+                    button_noConnection.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#097dff"));
+                    button_noConnection.Foreground = Brushes.White;
+                    break;
             }
         }
 
@@ -128,7 +137,7 @@ namespace NAnyConnect_test1
 
         void OnProcessExit(object sender, EventArgs e)
         {
-            controller.VpnEnd();
+            controller.VpnEnd(false);
             SystemEvents.PowerModeChanged -= OnPowerChange;
         }
 
@@ -138,7 +147,6 @@ namespace NAnyConnect_test1
             switch (e.Mode)
             {
                 case PowerModes.Resume:
-                    button_account_1.Content = "Zurück aus Schlaf !!";
                     controller.VpnWakeup();
                     break;
                 case PowerModes.Suspend:
@@ -152,10 +160,7 @@ namespace NAnyConnect_test1
             controller.RecognizeChangeReconnectAfterSleep();
         }
 
-        /*private void Connect(object sender, RoutedEventArgs e)
-        {
 
-        }*/
     }
 
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NAnyConnect_test1"
         mc:Ignorable="d"
-        Title="N-Any-Connect" Height="142" Width="600" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        Title="N-Any-Connect" Height="142" Width="355" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <!--https://stackoverflow.com/a/4182205-->
@@ -42,7 +42,7 @@
             <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
         <CheckBox x:Name="checkbox_reconnectAfterSleep" Content="Reconnect after sleep" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Checked="checkbox_reconnectAfterSleep_Checked" Unchecked="checkbox_reconnectAfterSleep_Checked" Height="15" Width="134"/>
-        <Button Background="White" Style="{StaticResource MyButtonStyle}" x:Name="button_account_1" Content="Button" HorizontalAlignment="Left" Margin="13,56,0,0" VerticalAlignment="Top" Tag="0" Click="ConnectButton_Connect_Click" Height="40" Width="134">
+        <Button Background="White" Style="{StaticResource MyButtonStyle}" x:Name="button_account_1" Content="Button" HorizontalAlignment="Left" Margin="13,56,0,0" VerticalAlignment="Top" Tag="0" Click="ConnectButton_Connect_Click" Height="40" Width="134" FontWeight="Bold">
             <Button.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="Create" Header="Create new" Tag="0" Click="ConnectButton_Edit_Click" />
@@ -54,7 +54,7 @@
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>
-        <Button Background="White" Style="{StaticResource MyButtonStyle}" x:Name="button_account_2" Content="Button" HorizontalAlignment="Left" Margin="152,56,0,0" VerticalAlignment="Top" Tag="1" Click="ConnectButton_Connect_Click" Height="40" Width="134">
+        <Button Background="White" Style="{StaticResource MyButtonStyle}" x:Name="button_account_2" Content="Button" HorizontalAlignment="Left" Margin="152,56,0,0" VerticalAlignment="Top" Tag="1" Click="ConnectButton_Connect_Click" Height="40" Width="134" FontWeight="Bold">
             <Button.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="Create1" Header="Create new" Tag="1" Click="ConnectButton_Edit_Click" />
@@ -66,38 +66,8 @@
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>
-        <Button Foreground="White" Background="#097dff" Style="{StaticResource MyButtonStyle}" x:Name="button_noConnection" Content="&#xF140;" HorizontalAlignment="Left" Margin="291,56,0,0" VerticalAlignment="Top" Tag="noConnection" FontFamily="Segoe Fluent Icons" Click="NoConnectionButton_Click" Width="40" Height="40" FontSize="20" RenderTransformOrigin="0,0"/>
-        <Button Content="&#xF8b0;" HorizontalAlignment="Left" Margin="261,21,0,0" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Click="SettingsButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="16" Width="16"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="400,29,0,0" VerticalAlignment="Top" Height="39" Width="143" Background="#FF097DFF" Foreground="AliceBlue">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Background" Value="#097dff"/>
-
-                </Style>
-            </Button.Style>
-
-            <Button.Template>
-                <ControlTemplate>
-                    <Border CornerRadius="4" Width="100" Height="25" Background="#097dff"></Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button HorizontalAlignment="Left" Margin="408,68,0,0" VerticalAlignment="Top" Height="39" Width="143" Background="#FF097DFF" Foreground="AliceBlue">
-            <Button.Content>
-                <Border CornerRadius="5" Height="25" Width="95" Margin="0" BorderBrush="Black" BorderThickness="4,4,4,4" >
-                    <TextBlock Text="Click on Me" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Border>
-            </Button.Content>
-
-
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#097dff"/>
-
-                </Style>
-            </Button.Style>
-
-        </Button>
+        <Button Foreground="White" Background="#097dff" Style="{StaticResource MyButtonStyle}" x:Name="button_noConnection" Content="&#xF140;" HorizontalAlignment="Left" Margin="291,56,0,0" VerticalAlignment="Top" Tag="noConnection" FontFamily="Segoe Fluent Icons" Click="NoConnectionButton_Click" Width="40" Height="40" FontSize="20" RenderTransformOrigin="0,0" FontWeight="Normal"/>
+        <Button Content="&#xF8b0;" HorizontalAlignment="Left" Margin="309,21,0,0" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Click="SettingsButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="16" Width="16" Foreground="#FF7F7F7F"/>
         <!--&#xE871; &#xEcc9; -->
     </Grid>
 </Window>

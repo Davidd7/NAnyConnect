@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NAnyConnect_test1"
         mc:Ignorable="d"
-        Title="EditWindow" Height="450" Width="800">
+        Title="EditWindow" Height="450" Width="800" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBox x:Name="form_script" HorizontalAlignment="Left" Margin="10,95,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="324" Height="76" AcceptsReturn="True" AcceptsTab="True"/>
         <PasswordBox x:Name="form_password" HorizontalAlignment="Left" Margin="10,207,0,0" VerticalAlignment="Top" Width="324"/>
