@@ -5,11 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NAnyConnect_test1"
         mc:Ignorable="d"
-        Title="Global settings" Height="163" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="/testicon.png" Background="White" Foreground="Black" WindowStyle="SingleBorderWindow">
-    <Grid>
-        <Label Content="Path to the Vpn Executable:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox x:Name="form_vpnExecutableLocation" HorizontalAlignment="Left" Margin="27,74,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="623" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="665,72,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <Label Content="Example: &quot;C:\Program Files (x86)\Cisco\Cisco AnyConnect Secure Mobility Client\vpncli.exe&quot;" HorizontalAlignment="Left" Margin="27,41,0,0" VerticalAlignment="Top"/>
-    </Grid>
+        Title="Global settings" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="/testicon.png" Background="White" Foreground="Black" WindowStyle="SingleBorderWindow">
+
+    <StackPanel Orientation="Vertical" Margin="0,5,10,15">
+
+        <Label Content="Path to the Vpn Executable" HorizontalAlignment="Left" Margin="10,0,0,0" Padding="0,5,5,0" VerticalAlignment="Top" FontWeight="Bold"/>
+
+        <Label Content="Example: &quot;C:\Program Files (x86)\Cisco\Cisco AnyConnect Secure Mobility Client\vpncli.exe&quot;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"  Padding="0,0,5,4" Foreground="Gray"/>
+
+        <TextBox x:Name="form_vpnExecutableLocation" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="623" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled"/>
+
+
+
+        <Button Content="Save" HorizontalAlignment="Center" Margin="10,20,0,0" VerticalAlignment="Top" Click="Button_Click" Width="120px"/>
+
+    </StackPanel>
+    
 </Window>
