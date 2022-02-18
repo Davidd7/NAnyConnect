@@ -9,12 +9,8 @@ namespace NAnyConnect_test1
     public class MainController
     {
 
-        //private bool reconnectAfterSleep = true;
-
         private int selectedVpn = -1;
         private int selectedVpnSleep = -1;
-        //string location = "";
-
 
         private List<Account> accounts = new List<Account>();
         private MainWindow window;

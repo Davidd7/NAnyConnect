@@ -10,6 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="images\icon.ico" />
+    <None Remove="images\icon2.ico" />
     <None Remove="testicon.png" />
   </ItemGroup>
 
@@ -18,6 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="images\icon.ico" />
+    <Resource Include="images\icon2.ico" />
     <Resource Include="testicon.png" />
   </ItemGroup>
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NAnyConnect_test1"
         mc:Ignorable="d"
-        Title="Global settings" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="/testicon.png" Background="White" Foreground="Black" WindowStyle="SingleBorderWindow">
+        Title="Global settings" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="/images/icon2.ico" Background="White" Foreground="Black" WindowStyle="SingleBorderWindow" >
 
     <StackPanel Orientation="Vertical" Margin="0,5,10,15">
 

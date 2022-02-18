@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:NAnyConnect_test1"
         mc:Ignorable="d"
         Title="Edit connection" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight" Icon="/images/icon2.ico">
     
         <StackPanel Orientation="Vertical" Margin="0,5,10,15">
 
