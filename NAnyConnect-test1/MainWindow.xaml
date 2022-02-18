@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NAnyConnect_test1"
         mc:Ignorable="d"
-        Title="N-Any-Connect" Height="142" Width="355" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Icon="/images/icon2.ico">
+        Title="N-Any-Connect" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Icon="/images/icon2.ico"
+        SizeToContent="WidthAndHeight">
 
     <Window.Resources>
         <!--https://stackoverflow.com/a/4182205-->
@@ -36,38 +37,45 @@
     </Window.Resources>
 
 
-    <Grid RenderTransformOrigin="0,0" Margin="0,0,0,0">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="0*"/>
-        </Grid.RowDefinitions>
-        <CheckBox x:Name="checkbox_reconnectAfterSleep" Content="Reconnect after sleep" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Checked="checkbox_reconnectAfterSleep_Checked" Unchecked="checkbox_reconnectAfterSleep_Checked" Height="15" Width="134"/>
-        <Button Background="White" Style="{StaticResource MyButtonStyle}" x:Name="button_account_1" Content="Button" HorizontalAlignment="Left" Margin="13,56,0,0" VerticalAlignment="Top" Tag="0" Click="ConnectButton_Connect_Click" Height="40" Width="134" FontWeight="Bold">
-            <Button.ContextMenu>
-                <ContextMenu>
-                    <MenuItem x:Name="Create" Header="Create new" Tag="0" Click="ConnectButton_Edit_Click" />
-                    <MenuItem x:Name="Connect" Header="Connect" Tag="0" Click="ConnectButton_Connect_Click" />
-                    <MenuItem x:Name="Disconnect" Header="Disconnect" Tag="0" Click="NoConnectionButton_Click" />
-                    <Separator />
-                    <MenuItem x:Name="Edit" Header="Edit" Tag="0" Click="ConnectButton_Edit_Click" />
-                    <MenuItem x:Name="Delete" Header="Delete" Tag="0" Click="ConnectButton_Delete_Click" />
-                </ContextMenu>
-            </Button.ContextMenu>
-        </Button>
-        <Button Background="White" Style="{StaticResource MyButtonStyle}" x:Name="button_account_2" Content="Button" HorizontalAlignment="Left" Margin="152,56,0,0" VerticalAlignment="Top" Tag="1" Click="ConnectButton_Connect_Click" Height="40" Width="134" FontWeight="Bold">
-            <Button.ContextMenu>
-                <ContextMenu>
-                    <MenuItem x:Name="Create1" Header="Create new" Tag="1" Click="ConnectButton_Edit_Click" />
-                    <MenuItem x:Name="Connect1" Header="Connect" Tag="1" Click="ConnectButton_Connect_Click" />
-                    <MenuItem x:Name="Disconnect1" Header="Disconnect" Tag="1" Click="NoConnectionButton_Click" />
-                    <Separator />
-                    <MenuItem x:Name="Edit1" Header="Edit" Tag="1" Click="ConnectButton_Edit_Click" />
-                    <MenuItem x:Name="Delete1" Header="Delete" Tag="1" Click="ConnectButton_Delete_Click" />
-                </ContextMenu>
-            </Button.ContextMenu>
-        </Button>
-        <Button Foreground="White" Background="#097dff" Style="{StaticResource MyButtonStyle}" x:Name="button_noConnection" Content="&#xF140;" HorizontalAlignment="Left" Margin="291,56,0,0" VerticalAlignment="Top" Tag="noConnection" FontFamily="Segoe Fluent Icons" Click="NoConnectionButton_Click" Width="40" Height="40" FontSize="20" RenderTransformOrigin="0,0" FontWeight="Normal"/>
-        <Button Content="&#xF8b0;" HorizontalAlignment="Left" Margin="309,21,0,0" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Click="SettingsButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="16" Width="16" Foreground="#FF7F7F7F"/>
-        <!--&#xE871; &#xEcc9; -->
-    </Grid>
+    <StackPanel Orientation="Vertical" Margin="0,0,0,12">
+
+        <DockPanel Margin="12,10,12,0" HorizontalAlignment="Stretch">
+
+            <CheckBox x:Name="checkbox_reconnectAfterSleep" Content="Reconnect after sleep" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Checked="checkbox_reconnectAfterSleep_Checked" Unchecked="checkbox_reconnectAfterSleep_Checked" Height="15" Width="134"/>
+            <Button Content="&#xF8b0;" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Margin="0,0,4,0" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Click="SettingsButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="16" Width="16" Foreground="#FF7F7F7F"/>
+        </DockPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="12,15,12,0">
+
+            <Button Background="White" Style="{StaticResource MyButtonStyle}" x:Name="button_account_1" Content="Button" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Tag="0" Click="ConnectButton_Connect_Click" Height="40" Width="134" FontWeight="Bold">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="Create" Header="Create new" Tag="0" Click="ConnectButton_Edit_Click" />
+                        <MenuItem x:Name="Connect" Header="Connect" Tag="0" Click="ConnectButton_Connect_Click" />
+                        <MenuItem x:Name="Disconnect" Header="Disconnect" Tag="0" Click="NoConnectionButton_Click" />
+                        <Separator />
+                        <MenuItem x:Name="Edit" Header="Edit" Tag="0" Click="ConnectButton_Edit_Click" />
+                        <MenuItem x:Name="Delete" Header="Delete" Tag="0" Click="ConnectButton_Delete_Click" />
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+            <Button Background="White" Style="{StaticResource MyButtonStyle}" x:Name="button_account_2" Content="Button" HorizontalAlignment="Left" Margin="8,0,0,0" VerticalAlignment="Top" Tag="1" Click="ConnectButton_Connect_Click" Height="40" Width="134" FontWeight="Bold">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="Create1" Header="Create new" Tag="1" Click="ConnectButton_Edit_Click" />
+                        <MenuItem x:Name="Connect1" Header="Connect" Tag="1" Click="ConnectButton_Connect_Click" />
+                        <MenuItem x:Name="Disconnect1" Header="Disconnect" Tag="1" Click="NoConnectionButton_Click" />
+                        <Separator />
+                        <MenuItem x:Name="Edit1" Header="Edit" Tag="1" Click="ConnectButton_Edit_Click" />
+                        <MenuItem x:Name="Delete1" Header="Delete" Tag="1" Click="ConnectButton_Delete_Click" />
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
+            <Button Foreground="White" Background="#097dff" Style="{StaticResource MyButtonStyle}" x:Name="button_noConnection" Content="&#xF140;" HorizontalAlignment="Left" Margin="8,0,0,0" VerticalAlignment="Top" Tag="noConnection" FontFamily="Segoe Fluent Icons" Click="NoConnectionButton_Click" Width="40" Height="40" FontSize="20" RenderTransformOrigin="0,0" FontWeight="Normal"/>
+
+        </StackPanel>
+
+    </StackPanel>
+
+
 </Window>
