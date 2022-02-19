@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace NAnyConnect_test1
 {
@@ -13,7 +14,7 @@ namespace NAnyConnect_test1
     {
         private static readonly SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 
-        public static async void Connect(string vpnExecutableLocation, string fileContent)
+        public static async void Connect(string vpnExecutableLocation, string fileContent, Action<bool>? showLoading = null)
         {
             // Using semaphoreSlim so that only one thread interacts with the vpn-cmd-interface at any moment
             await semaphoreSlim.WaitAsync();
@@ -27,6 +28,7 @@ namespace NAnyConnect_test1
                 }
                 // Interacting with the vpn-cmd-interface to start a connection
                 string strCmdText = $"/C {vpnExecutableLocation} -s < test.txt";
+                showLoading?.Invoke(true);
                 if (Options.ShowCommandPromptWindows)
                 {
                     await Process.Start("CMD.exe", strCmdText).WaitForExitAsync();
@@ -43,6 +45,7 @@ namespace NAnyConnect_test1
                     process.Start();
                     await process.WaitForExitAsync();
                 }
+                showLoading?.Invoke(false);
                 // Deleting the created file again
                 File.Delete("test.txt");
             }
@@ -51,7 +54,7 @@ namespace NAnyConnect_test1
             }
         }
 
-        public static async void Disconnect(string vpnExecutableLocation)
+        public static async void Disconnect(string vpnExecutableLocation, Action<bool>? showLoading = null)
         {
             // Using semaphoreSlim so that only one thread interacts with the vpn-cmd-interface at any moment
             await semaphoreSlim.WaitAsync();
@@ -59,6 +62,7 @@ namespace NAnyConnect_test1
             {
                 // Interacting with the vpn-cmd-interface to disconnect a possibly running connection
                 string strCmdText = $"/C {vpnExecutableLocation} disconnect";
+                showLoading?.Invoke(true);
                 if (Options.ShowCommandPromptWindows)
                 {
                     await Process.Start("CMD.exe", strCmdText).WaitForExitAsync();
@@ -75,6 +79,7 @@ namespace NAnyConnect_test1
                     process.Start();
                     await process.WaitForExitAsync();
                 }
+                showLoading?.Invoke(false);
             }
             finally
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace NAnyConnect_test1
 {
@@ -100,6 +101,14 @@ namespace NAnyConnect_test1
             Options.ShowCommandPromptWindows = showCommandPromptWindows;
         }
 
+        public void MainWindowShowLoading(bool b, MainController c) {
+            System.Windows.Application.Current?.Dispatcher.BeginInvoke(() =>
+            {
+                window.SetLoading(b);
+                Mouse.OverrideCursor = b ? Cursors.AppStarting : Cursors.Arrow;
+            });
+        }
+
 
         public void SaveChanges(int slot, string displayName, string script, ref string password) {
 
@@ -143,7 +152,7 @@ namespace NAnyConnect_test1
             string script = accounts[slot].Script;
             script = script.Replace("<password>", pwd);
 
-            VpnCmdConnector.Connect(Options.VpnExecutableLocation, script);
+            VpnCmdConnector.Connect(Options.VpnExecutableLocation, script, (b) => MainWindowShowLoading(b, this));
 
             selectedVpn = accounts[slot].Id;
             AdaptConnectionButtons(window);
@@ -167,7 +176,7 @@ namespace NAnyConnect_test1
 
         public void VpnEnd(bool updateUI = true)
         {
-            VpnCmdConnector.Disconnect(Options.VpnExecutableLocation);
+            VpnCmdConnector.Disconnect(Options.VpnExecutableLocation, (b) => MainWindowShowLoading(b, this));
 
             selectedVpn = -1;
             if (updateUI)

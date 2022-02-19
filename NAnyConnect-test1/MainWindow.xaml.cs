@@ -100,6 +100,17 @@ namespace NAnyConnect_test1
             }
         }
 
+        public void SetLoading(bool b) {
+            if (b) {
+                text_loading.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                text_loading.Visibility = Visibility.Collapsed;
+            }
+
+        }
+
 
         #region Click events
         private void ConnectButton_Connect_Click(object sender, RoutedEventArgs e)
@@ -145,7 +156,7 @@ namespace NAnyConnect_test1
 
         void OnProcessExit(object sender, EventArgs e)
         {
-            controller.VpnEnd(false);
+            controller.VpnEnd(false); // false necessary, because ui-thread is not the caller of this event (and unnecessary to update ui at program exit anyway)
             SystemEvents.PowerModeChanged -= OnPowerChange;
         }
 

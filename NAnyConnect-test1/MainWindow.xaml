@@ -39,10 +39,12 @@
 
     <StackPanel Orientation="Vertical" Margin="0,0,0,12">
 
-        <DockPanel Margin="12,10,12,0" HorizontalAlignment="Stretch">
+        <DockPanel Margin="12,10,12,0" HorizontalAlignment="Stretch" >
 
-            <CheckBox x:Name="checkbox_reconnectAfterSleep" Content="Reconnect after sleep" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Checked="Checkbox_reconnectAfterSleep_Checked" Unchecked="Checkbox_reconnectAfterSleep_Checked" Height="15" Width="134"/>
-            <Button Content="&#xF8b0;" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Margin="0,0,4,0" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Click="SettingsButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="16" Width="16" Foreground="#FF7F7F7F"/>
+            <CheckBox x:Name="checkbox_reconnectAfterSleep" Content="Reconnect after sleep" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Checked="Checkbox_reconnectAfterSleep_Checked" Unchecked="Checkbox_reconnectAfterSleep_Checked" Height="15" Width="134" DockPanel.Dock="Left"/>
+            <Button Content="&#xF8b0;" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Margin="0,1,4,0" VerticalAlignment="Top" FontFamily="Segoe Fluent Icons" Click="SettingsButton_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="16" Width="16" Foreground="#FF7F7F7F" DockPanel.Dock="Right" Padding="1,1,1,1"/>
+            <TextBlock x:Name="text_loading" TextWrapping="Wrap" Text="Loading..." TextAlignment="Right" Padding="0,0,4,0" Visibility="Collapsed" />
+
         </DockPanel>
 
         <StackPanel Orientation="Horizontal" Margin="12,15,12,0">
