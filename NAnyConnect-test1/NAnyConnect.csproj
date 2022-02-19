@@ -1,17 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <RootNamespace>NAnyConnect_test1</RootNamespace>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-    <UseWindowsForms>False</UseWindowsForms>
-    <AssemblyName>N-Any-Connect</AssemblyName>
-  </PropertyGroup>
+<PropertyGroup>
+	<OutputType>WinExe</OutputType>
+	<TargetFramework>net6.0-windows</TargetFramework>
+	<RootNamespace>NAnyConnect_test1</RootNamespace>
+	<Nullable>enable</Nullable>
+	<UseWPF>true</UseWPF>
+	<UseWindowsForms>False</UseWindowsForms>
+	<AssemblyName>N-Any-Connect</AssemblyName>
+	<ApplicationIcon>app_icon_white_multiple_resolutions.ico</ApplicationIcon>
+</PropertyGroup>
 
   <ItemGroup>
     <None Remove="images\icon2.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="application_icon_256.ico" />
+    <Content Include="app_icon_white_multiple_resolutions.ico" />
   </ItemGroup>
 
   <ItemGroup>
