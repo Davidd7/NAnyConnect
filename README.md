@@ -1,4 +1,4 @@
-# NAnyConnect
+# N-Any-Connect
 
 **What this project is:**
 * A graphical user interface for easily switching between AnyConnect-VPN-Profiles on Windows
