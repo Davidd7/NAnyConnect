@@ -8,18 +8,20 @@ using System.Threading.Tasks;
 
 namespace NAnyConnect_test1
 {
-    /*
-     
-     */
+
+    /// <summary>
+    /// Class for storing and retrieving passwords.
+    /// Please note: This is not more secure than saving the password in plain text in a batch file.
+    /// The password might be encrypted via the ProtectedData-class, but it's decrypted during the execution of the program (which is started without authentication), temporarily stored in strings (which is a security risk) and passed to the cmd in plain text.
+    /// </summary>
     internal class PasswordManager
     {
 
         public static string GetPassword(int id)
         {
             string[] res = File.ReadAllLines($"obscure{id}.txt");
-            //return ProtectedData.Unprotect(Encoding.UTF8.GetBytes(res[0]), Encoding.UTF8.GetBytes(res[1]), DataProtectionScope.CurrentUser).ToString() ?? "";
-            byte[] pwd_byte = ProtectedData.Unprotect( res[0].Split('-').Select(b => Convert.ToByte(b, 16)).ToArray(), res[1].Split('-').Select(b => Convert.ToByte(b, 16)).ToArray(), DataProtectionScope.CurrentUser)/*.ToString() ?? ""*/; // https://stackoverflow.com/questions/1230303/bitconverter-tostring-in-reverse
-            string pwd = Encoding.UTF8.GetString(pwd_byte);//.ToString();   //Split('-').Select(b => Convert.ToByte(b, 16)).ToArray();
+            byte[] pwd_byte = ProtectedData.Unprotect(ByteArrayStringToByteArray(res[0]), ByteArrayStringToByteArray(res[1]), DataProtectionScope.CurrentUser);
+            string pwd = Encoding.UTF8.GetString(pwd_byte);
             return pwd;
         }
 
@@ -44,6 +46,10 @@ namespace NAnyConnect_test1
                 writer.WriteLine(BitConverter.ToString( ciphertext ));
                 writer.WriteLine(BitConverter.ToString( entropy ));
             }
+        }
+
+        private static Byte[] ByteArrayStringToByteArray(string str) {
+            return str.Split('-').Select(b => Convert.ToByte(b, 16)).ToArray(); // https://stackoverflow.com/questions/1230303/bitconverter-tostring-in-reverse
         }
 
 

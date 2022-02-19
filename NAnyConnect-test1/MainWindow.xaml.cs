@@ -25,7 +25,6 @@ namespace NAnyConnect_test1
 
     public partial class MainWindow : Window
     {
-        //private List<Account> accounts = new List<Account>();
         private MainController controller;
         private List<Button> buttons = new List<Button>();
         private List<ButtonState> buttonStates = new List<ButtonState>( );
@@ -58,7 +57,6 @@ namespace NAnyConnect_test1
             buttons.ElementAt(slot).Content = content;
             switch (state) {
                 case ButtonState.Disabled:
-                    //buttons.ElementAt(slot).IsEnabled = false;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[0]).Visibility = Visibility.Visible; // Create
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[1]).Visibility = Visibility.Collapsed; // Connect
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[2]).Visibility = Visibility.Collapsed; // Disconnect
@@ -66,7 +64,6 @@ namespace NAnyConnect_test1
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[5]).Visibility = Visibility.Collapsed; // Delete
                     break;
                 case ButtonState.EnabledUnselected:
-                    //buttons.ElementAt(slot).IsEnabled = true;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[0]).Visibility = Visibility.Collapsed;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[1]).Visibility = Visibility.Visible;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[2]).Visibility = Visibility.Collapsed;
@@ -76,7 +73,6 @@ namespace NAnyConnect_test1
                     buttons.ElementAt(slot).Foreground = Brushes.Black;
                     break;
                 case ButtonState.EnabledSelected:
-                    //buttons.ElementAt(slot).IsEnabled = true;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[0]).Visibility = Visibility.Collapsed;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[1]).Visibility = Visibility.Collapsed;
                     ((MenuItem)buttons.ElementAt(slot).ContextMenu.Items[2]).Visibility = Visibility.Visible;
@@ -89,7 +85,7 @@ namespace NAnyConnect_test1
             buttonStates[slot] = state;
         }
 
-        public void setUpNoConnectionButton(ButtonState state)
+        public void SetUpNoConnectionButton(ButtonState state)
         {
             switch (state)
             {
@@ -167,7 +163,7 @@ namespace NAnyConnect_test1
             }
         }
 
-        private void checkbox_reconnectAfterSleep_Checked(object sender, RoutedEventArgs e)
+        private void Checkbox_reconnectAfterSleep_Checked(object sender, RoutedEventArgs e)
         {
             controller.RecognizeChangeReconnectAfterSleep();
         }

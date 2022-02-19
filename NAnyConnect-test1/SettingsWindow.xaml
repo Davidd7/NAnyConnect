@@ -10,10 +10,12 @@
     <StackPanel Orientation="Vertical" Margin="0,5,10,15">
 
         <Label Content="Path to the Vpn Executable" HorizontalAlignment="Left" Margin="10,0,0,0" Padding="0,5,5,0" VerticalAlignment="Top" FontWeight="Bold"/>
-
         <Label Content="Example: &quot;C:\Program Files (x86)\Cisco\Cisco AnyConnect Secure Mobility Client\vpncli.exe&quot;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"  Padding="0,0,5,4" Foreground="Gray"/>
-
         <TextBox x:Name="form_vpnExecutableLocation" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="623" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled"/>
+
+        <Label Content="Show command prompt windows" HorizontalAlignment="Left" Margin="10,10,0,0" Padding="0,5,5,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBlock Text="Showing command prompt windows is useful for debugging purposes (seeing if/where a command gets stuck, being able to manually close the window to send a disconnect-command)" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"  Padding="0,0,5,4" Foreground="Gray" Width="623" TextWrapping="Wrap"/>
+        <CheckBox Content="Show command prompt windows" x:Name="form_showCommandPromptWindows" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="623" />
 
 
 

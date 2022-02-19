@@ -39,7 +39,7 @@ namespace NAnyConnect_test1
             var script = form_script.Text;
             var password = form_password.Password;
 
-            controller.saveChanges(slot, displayName, script, ref password);
+            controller.SaveChanges(slot, displayName, script, ref password);
 
             Close();
         }

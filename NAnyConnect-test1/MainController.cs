@@ -12,12 +12,12 @@ namespace NAnyConnect_test1
         private int selectedVpn = -1;
         private int selectedVpnSleep = -1;
 
-        private List<Account> accounts = new List<Account>();
+        private IReadOnlyList<Account> accounts;
         private MainWindow window;
 
         private void LoadData()
         {
-            accounts = Account.GetAccounts();
+            accounts = Account.GetReadOnlyAccounts();
         }
 
 
@@ -36,7 +36,7 @@ namespace NAnyConnect_test1
                 }
                 mainWindow.SetUpConnectButton(i, (accounts.Count > i ? accounts[i].DisplayName : "empty"), state);
             }
-            mainWindow.setUpNoConnectionButton(  (selectedVpn != -1 ? MainWindow.ButtonState.EnabledUnselected : MainWindow.ButtonState.EnabledSelected)  );
+            mainWindow.SetUpNoConnectionButton(  (selectedVpn != -1 ? MainWindow.ButtonState.EnabledUnselected : MainWindow.ButtonState.EnabledSelected)  );
         }
 
         public void AdaptReconnectAfterSleep() {
@@ -62,10 +62,10 @@ namespace NAnyConnect_test1
 
         public void DeleteSlot(int slot)
         {
-            if (getIdFromSlot(slot).Equals(selectedVpn))
+            if (GetIdFromSlot(slot).Equals(selectedVpn))
                 VpnEnd(false); // ui will be updated at the end of this method
-            Account.deleteAccount(  getIdFromSlot(slot)  );
-            accounts = Account.GetAccounts();
+            Account.DeleteAccount(  GetIdFromSlot(slot)  );
+            accounts = Account.GetReadOnlyAccounts();
             AdaptConnectionButtons(window);
         } 
 
@@ -91,24 +91,26 @@ namespace NAnyConnect_test1
 
         public void SetUpSettingsWindow(SettingsWindow sw)
         {
-            sw.form_vpnExecutableLocation.Text = Options.VpnExecutableLocation;
+            sw.SetVpnExecutableLocationTextbox(Options.VpnExecutableLocation);
+            sw.SetshowCommandPromptWindowsCheckbox(Options.ShowCommandPromptWindows);
         }
 
-        public void SaveSettingsWindowChanges(string vpnExecutableLocation) { 
+        public void SaveSettingsWindowChanges(string vpnExecutableLocation, bool showCommandPromptWindows) {
             Options.VpnExecutableLocation = vpnExecutableLocation;
+            Options.ShowCommandPromptWindows = showCommandPromptWindows;
         }
 
 
-        public void saveChanges(int slot, string displayName, string script, ref string password) {
+        public void SaveChanges(int slot, string displayName, string script, ref string password) {
 
             if (slot >= accounts.Count)
             {
-                int id = Account.createNewAccount(displayName, script);
+                int id = Account.CreateNewAccount(displayName, script);
                 PasswordManager.SetPassword(id, ref password);
             }
             else // Update existing account
             {
-                Account.updateAccount(accounts[slot].Id, displayName, script);
+                Account.UpdateAccount(accounts[slot].Id, displayName, script);
                 if (password != "") {
                     PasswordManager.SetPassword(accounts[slot].Id, ref password);
                 }
@@ -148,15 +150,14 @@ namespace NAnyConnect_test1
         }
         public void VpnStartWithId(int id)
         {
-            VpnStart(  getSlotFromId(id)  );
+            VpnStart(  GetSlotFromId(id)  );
         }
 
-        private int getSlotFromId(int id) {
-            int slot = accounts.FindIndex(a => a.Id == id);
-            return (slot < 2 ? slot : -1);
+        private int GetSlotFromId(int id) {
+            return Account.GetPositionFromId(id);
         }
 
-        private int getIdFromSlot(int slot) {
+        private int GetIdFromSlot(int slot) {
             if (slot >= accounts.Count) {
                 return -1;
             }
@@ -178,7 +179,7 @@ namespace NAnyConnect_test1
         {
             int runningId = selectedVpn; // Copy ValueType
             VpnEnd();
-            VpnStart(runningId);
+            VpnStartWithId(runningId);
         }
 
 

@@ -33,16 +33,20 @@ namespace NAnyConnect_test1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            controller.SaveSettingsWindowChanges(form_vpnExecutableLocation.Text);
+            controller.SaveSettingsWindowChanges(form_vpnExecutableLocation.Text, form_showCommandPromptWindows.IsChecked ?? true);
             Close();
         }
-
-
 
 
         public void SetVpnExecutableLocationTextbox(string s)
         {
             form_vpnExecutableLocation.Text = s;
+        }
+
+
+        public void SetshowCommandPromptWindowsCheckbox(bool b)
+        {
+            form_showCommandPromptWindows.IsChecked = b;
         }
 
 

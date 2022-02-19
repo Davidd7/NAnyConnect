@@ -9,67 +9,40 @@ namespace NAnyConnect_test1
 {
     internal class Account
     {
-        private static List<Account>? accounts = null;
-
 
         public int Id { get; private set; } = 0;
-        public string DisplayName { get; set; } = "Unnamed";
-        public string Script { get; set; } = "connect _enterVpnUrlHere_\n_enterYourUsernameHere_\n<password>";
-        public int OrderValue { get; set; } = 0;
+        public string DisplayName { get; private set; } = "Unnamed";
+        public string Script { get; private set; } = "connect _enterVpnUrlHere_\n_enterYourUsernameHere_\n<password>";
+        public int OrderValue { get; private set; } = 0;
 
 
+        private Account() { 
+        }
 
-
-
-        private static void createTableIfNotExists()
-        {
-            using (var connection = new SqliteConnection("Data Source=n_any_connect_database.db"))
-            {
-                connection.Open();
-
-                SqliteCommand sqlite_cmd;
-                string Createsql = "CREATE TABLE IF NOT EXISTS vpn_accounts (id INTEGER PRIMARY KEY, display_name TEXT, script TEXT, order_value INT)";
-                sqlite_cmd = connection.CreateCommand();
-                sqlite_cmd.CommandText = Createsql;
-                sqlite_cmd.ExecuteNonQuery();
-            }
+        public static System.Collections.ObjectModel.ReadOnlyCollection<Account> GetReadOnlyAccounts() {
+            return Accounts.AsReadOnly();
         }
 
 
-        private static void loadAccounts()
+        private static List<Account>? _accounts = null;
+        private static List<Account> Accounts
         {
-            if (accounts != null)
-                return;
-            accounts = new List<Account>();
-
-            createTableIfNotExists();
-            using (var connection = new SqliteConnection("Data Source=n_any_connect_database.db"))
+            get
             {
-                connection.Open();
-
-                var command = connection.CreateCommand();
-                command.CommandText = @"SELECT * FROM vpn_accounts ORDER BY order_value, id LIMIT 2";
-                using (var reader = command.ExecuteReader())
+                if (_accounts == null)
                 {
-                    while (reader.Read())
-                    {
-                        var id = reader.GetInt32(0);
-                        var displayName = reader.GetString(1);
-                        var script = reader.GetString(2);
-                        var order = reader.GetInt32(3);
-
-                        Account newAccount = new Account();
-                        newAccount.Id = id;
-                        newAccount.DisplayName = displayName;
-                        newAccount.Script = script;
-                        newAccount.OrderValue = order;
-                        Account.accounts.Add(newAccount);
-                    }
+                    _accounts = LoadAccounts();
                 }
+                return _accounts;
+            }
+            set
+            {
+                _accounts = value;
             }
         }
 
-        public static void deleteAccount(int id)
+
+        public static void DeleteAccount(int id)
         {
             using (var connection = new SqliteConnection("Data Source=n_any_connect_database.db"))
             {
@@ -81,20 +54,14 @@ namespace NAnyConnect_test1
                 sqlite_cmd.Parameters.AddWithValue("id", id);
                 sqlite_cmd.ExecuteNonQuery();
             }
-            accounts.RemoveAll(a => a.Id.Equals(id));
+            Accounts.RemoveAll(a => a.Id.Equals(id));
         }
 
 
 
-        public static List<Account> GetAccounts()
+
+        public static int CreateNewAccount(string displayName, string script)
         {
-            if (accounts == null) {
-                loadAccounts();
-            }
-            return accounts; //new List<Account> { new Account() };
-        }
-
-        public static int createNewAccount(  string displayName, string script  ) {
             int newId = -1;
             using (var connection = new SqliteConnection("Data Source=n_any_connect_database.db"))
             {
@@ -113,7 +80,7 @@ namespace NAnyConnect_test1
 
                 SqliteCommand cmd = connection.CreateCommand();
                 cmd.CommandText = "SELECT last_insert_rowid()";
-                var reader = cmd.ExecuteReader(); // .ExecuteScalar();
+                var reader = cmd.ExecuteReader();
                 reader.Read();
                 newId = reader.GetInt32(0);
 
@@ -125,12 +92,12 @@ namespace NAnyConnect_test1
             newAccount.DisplayName = displayName;
             newAccount.Script = script;
             newAccount.OrderValue = 0;
-            Account.accounts.Add(newAccount);
+            Accounts.Add(newAccount);
 
             return newId;
         }
 
-        public static void updateAccount(  int id, string displayName, string script  )
+        public static void UpdateAccount(int id, string displayName, string script)
         {
             using (var connection = new SqliteConnection("Data Source=n_any_connect_database.db"))
             {
@@ -146,11 +113,75 @@ namespace NAnyConnect_test1
                 sqlite_cmd.ExecuteNonQuery();
             }
 
-            Account changedAccount = accounts.Where(a => a.Id == id).First();
+            Account changedAccount = Accounts.Where(a => a.Id == id).First();
             changedAccount.DisplayName = displayName;
             changedAccount.Script = script;
-
         }
+
+        public static int GetPositionFromId(int id) {
+            int slot = Accounts.FindIndex(a => a.Id == id);
+            return (slot < 2 ? slot : -1);
+        }
+
+
+
+
+
+
+
+        private static void CreateTableIfNotExists()
+        {
+            using (var connection = new SqliteConnection("Data Source=n_any_connect_database.db"))
+            {
+                connection.Open();
+
+                SqliteCommand sqlite_cmd;
+                string Createsql = "CREATE TABLE IF NOT EXISTS vpn_accounts (id INTEGER PRIMARY KEY, display_name TEXT, script TEXT, order_value INT)";
+                sqlite_cmd = connection.CreateCommand();
+                sqlite_cmd.CommandText = Createsql;
+                sqlite_cmd.ExecuteNonQuery();
+            }
+        }
+
+
+        private static List<Account> LoadAccounts()
+        {
+            List<Account> loadedAccounts = new List<Account>();
+
+            CreateTableIfNotExists();
+            using (var connection = new SqliteConnection("Data Source=n_any_connect_database.db"))
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText = @"SELECT * FROM vpn_accounts ORDER BY order_value, id LIMIT 2";
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var id = reader.GetInt32(0);
+                        var displayName = reader.GetString(1);
+                        var script = reader.GetString(2);
+                        var order = reader.GetInt32(3);
+
+                        Account newAccount = new Account
+                        {
+                            Id = id,
+                            DisplayName = displayName,
+                            Script = script,
+                            OrderValue = order
+                        };
+                        loadedAccounts.Add(newAccount);
+                    }
+                }
+            }
+
+            return loadedAccounts;
+        }
+
+
+
+
 
 
     }
